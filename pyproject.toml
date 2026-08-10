@@ -1,0 +1,40 @@
+[project]
+name = "social-media-downloader"
+version = "0.0.1"
+description = "Download videos from Tiktok, Instagram, Facebook and more"
+authors = [
+    {name = "danialcala94", email = "danielalcalavalera@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+
+[project.urls]
+Homepage = "https://github.com/Implosiv3/social-media-downloader"
+Issues = "https://github.com/Implosiv3/social-media-downloader/issues"
+
+[tool.poetry.dependencies]
+# Mandatory
+file_easy = { version = ">=0.0.1,<1.0.0", optional = false }
+file_downloader_easy = { version = ">=0.0.2,<1.0.0", optional = false }
+web_scraper_easy = { version = ">=0.0.2,<1.0.0", optional = false }
+httpx_easy = { version = ">=0.0.2,<1.0.0", optional = false }
+# Optional
+
+[tool.poetry]
+packages = [{include = "social_media_downloader", from = "src"}]
+
+[tool.poetry.group.dev.dependencies]
+pytest = { version = "^8.3.5", optional = false }
+pytest-asyncio = { version = ">=0.24.0", optional = false }
+pytest-easy = { version = ">=0.0.5,<1.0.0", optional = false }
+
+[tool.pytest.ini_options]
+markers = [
+    "mandatory: mandatory tests for release",
+    "additional: exhaustive and demanding tests"
+]
+asyncio_default_fixture_loop_scope = 'function'
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

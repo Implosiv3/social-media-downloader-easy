@@ -1,0 +1,10 @@
+build/*
+dist/*
+social_media_downloader.egg-info/*
+__pycache__
+*.bat
+settings.json
+.env*
+!.env.example
+test_files/*
+!test_files/test.txt
