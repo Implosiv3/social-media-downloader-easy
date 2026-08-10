@@ -104,6 +104,10 @@ class _SnapsaveDownloader:
         Cloudflare appears while navigating and
         we don't wait until it is completed to
         obtain the cookie.
+
+        I used my web navigator and had to go to
+        an url like this:
+        - https://snapsave.app/action.php?lang=en&__cf_chl_tk=f017gkCoKS2isf0VdgfV3pQW9LhsF4M.YsW8USIbgS4-1786372196-1.0.1.1-Vnq180SFnmhx8IjuN6LgUgKklMEWOvuthgEYB8E7XG0
         """
         with httpx.Client(
             headers = HEADERS,
