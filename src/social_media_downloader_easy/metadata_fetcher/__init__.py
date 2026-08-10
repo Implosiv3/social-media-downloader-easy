@@ -1,4 +1,4 @@
-from social_media_downloader.metadata_fetcher.tiktok import _TiktokMetadataFetcher
+from social_media_downloader_easy.metadata_fetcher.tiktok import _TiktokMetadataFetcher
 from web_scraper_easy.chrome.dataclasses.options_argument import MuteAudioChromeOptionsArgument, CustomChromeOptionsArgument
 from web_scraper_easy import ChromeScraper
 

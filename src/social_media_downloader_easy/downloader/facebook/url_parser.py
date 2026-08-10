@@ -8,9 +8,9 @@ If you shee numbers and letters is a sharing url
 that will be transformed in the real id when
 redirected.
 """
-from social_media_downloader.downloader.facebook.dataclasses import FacebookUrl
-from social_media_downloader.downloader.facebook.regex import FacebookVideoLinkRegularExpression
-from social_media_downloader.downloader.utils import clean_url
+from social_media_downloader_easy.downloader.facebook.dataclasses import FacebookUrl
+from social_media_downloader_easy.downloader.facebook.regex import FacebookVideoLinkRegularExpression
+from social_media_downloader_easy.downloader.utils import clean_url
 
 import re
 

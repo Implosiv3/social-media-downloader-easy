@@ -1,4 +1,4 @@
-from social_media_downloader.metadata_fetcher import MetadataFetcher
+from social_media_downloader_easy.metadata_fetcher import MetadataFetcher
 
 import pytest
 

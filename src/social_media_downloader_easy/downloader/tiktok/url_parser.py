@@ -3,9 +3,9 @@ In this file we handle Tiktok url and we parse
 them to obtain basic information and check if
 they are valid ones or not.
 """
-from social_media_downloader.downloader.tiktok.regex import TiktokVideoLinkRegularExpression
-from social_media_downloader.downloader.tiktok.dataclasses import TiktokUrl
-from social_media_downloader.downloader.utils import clean_url
+from social_media_downloader_easy.downloader.tiktok.regex import TiktokVideoLinkRegularExpression
+from social_media_downloader_easy.downloader.tiktok.dataclasses import TiktokUrl
+from social_media_downloader_easy.downloader.utils import clean_url
 from httpx_easy.client import HttpClient
 
 import re

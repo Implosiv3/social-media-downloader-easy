@@ -1,7 +1,7 @@
-from social_media_downloader.downloader.tiktok.consts import TIKWM_API_HEADERS, TIKWM_API_URL
-from social_media_downloader.downloader.tiktok.dataclasses import TikTokVideo
-from social_media_downloader.downloader.tiktok.regex import TiktokVideoLinkRegularExpression
-from social_media_downloader.downloader.tiktok.url_parser import TiktokUrlParser
+from social_media_downloader_easy.downloader.tiktok.consts import TIKWM_API_HEADERS, TIKWM_API_URL
+from social_media_downloader_easy.downloader.tiktok.dataclasses import TikTokVideo
+from social_media_downloader_easy.downloader.tiktok.regex import TiktokVideoLinkRegularExpression
+from social_media_downloader_easy.downloader.tiktok.url_parser import TiktokUrlParser
 from file_easy import FileResource
 
 import re

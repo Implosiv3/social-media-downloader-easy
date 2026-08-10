@@ -1,6 +1,6 @@
-from social_media_downloader.downloader.tiktok.url_parser import TiktokUrlParser
-from social_media_downloader.downloader.tiktok.url_parser import _get_id_and_username_from_long_url
-from social_media_downloader.metadata_fetcher.tiktok.dataclasses import TiktokVideoMetadata
+from social_media_downloader_easy.downloader.tiktok.url_parser import TiktokUrlParser
+from social_media_downloader_easy.downloader.tiktok.url_parser import _get_id_and_username_from_long_url
+from social_media_downloader_easy.metadata_fetcher.tiktok.dataclasses import TiktokVideoMetadata
 
 
 class _TiktokMetadataFetcher:

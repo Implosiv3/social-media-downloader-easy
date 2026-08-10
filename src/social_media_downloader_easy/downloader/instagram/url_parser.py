@@ -8,9 +8,9 @@ for the different instagram formats, extracted
 from here:
 - https://github.com/Okramjimmy/Instagram-reels-downloader/blob/c36c2055dc89f5028bdb99c9a9d689ea0affa175/src/features/instagram/utils.ts#L16-L18
 """
-from social_media_downloader.downloader.instagram.regex import InstagramVideoLinkRegularExpression
-from social_media_downloader.downloader.instagram.dataclasses import InstagramUrl
-from social_media_downloader.downloader.utils import clean_url
+from social_media_downloader_easy.downloader.instagram.regex import InstagramVideoLinkRegularExpression
+from social_media_downloader_easy.downloader.instagram.dataclasses import InstagramUrl
+from social_media_downloader_easy.downloader.utils import clean_url
 
 import re
 

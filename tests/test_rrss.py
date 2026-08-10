@@ -1,4 +1,4 @@
-from social_media_downloader.downloader import SocialMediaDownloader
+from social_media_downloader_easy.downloader import SocialMediaDownloader
 from tests.common import (
     TIKTOK_VIDEO_LONG_URL,
     TIKTOK_VIDEO_SHORT_URL,

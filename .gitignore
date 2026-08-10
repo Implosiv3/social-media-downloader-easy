@@ -1,6 +1,6 @@
 build/*
 dist/*
-social_media_downloader.egg-info/*
+social_media_downloader_easy.egg-info/*
 __pycache__
 *.bat
 settings.json

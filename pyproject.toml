@@ -1,7 +1,7 @@
 [project]
-name = "social-media-downloader"
-version = "0.0.1"
-description = "Download videos from Tiktok, Instagram, Facebook and more"
+name = "social-media-downloader-easy"
+version = "0.0.2"
+description = "Download videos from Tiktok, Instagram, Facebook and more, but made easy"
 authors = [
     {name = "danialcala94", email = "danielalcalavalera@gmail.com"}
 ]
@@ -9,8 +9,8 @@ readme = "README.md"
 requires-python = ">=3.10,<3.14"
 
 [project.urls]
-Homepage = "https://github.com/Implosiv3/social-media-downloader"
-Issues = "https://github.com/Implosiv3/social-media-downloader/issues"
+Homepage = "https://github.com/Implosiv3/social-media-downloader-easy"
+Issues = "https://github.com/Implosiv3/social-media-downloader-easy/issues"
 
 [tool.poetry.dependencies]
 # Mandatory
@@ -21,7 +21,7 @@ httpx_easy = { version = ">=0.0.2,<1.0.0", optional = false }
 # Optional
 
 [tool.poetry]
-packages = [{include = "social_media_downloader", from = "src"}]
+packages = [{include = "social_media_downloader_easy", from = "src"}]
 
 [tool.poetry.group.dev.dependencies]
 pytest = { version = "^8.3.5", optional = false }
