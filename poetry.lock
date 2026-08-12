@@ -198,14 +198,14 @@ files = [
 
 [[package]]
 name = "env-easy"
-version = "0.0.3"
+version = "0.0.4"
 description = "Environment variables, but easy"
 optional = false
 python-versions = "<3.14,>=3.8"
 groups = ["main"]
 files = [
-    {file = "env_easy-0.0.3-py3-none-any.whl", hash = "sha256:886836874d89b0a44f1767a50bd42cd05d7cecc5357fe8c5dfe1fe918003021b"},
-    {file = "env_easy-0.0.3.tar.gz", hash = "sha256:9caa24ef37ed6b5c877b9514a80c6f2b24cc56049727e95efd285487e6f8cdda"},
+    {file = "env_easy-0.0.4-py3-none-any.whl", hash = "sha256:d263a3d65d0d671ab3e8dad6bc962d453eaf6b8103edd78a1cb2550ad92db455"},
+    {file = "env_easy-0.0.4.tar.gz", hash = "sha256:cd833f2a79df130f78823f05dedf712387b9c2eb8233fae79c8619407d5bbffa"},
 ]
 
 [package.dependencies]
@@ -602,14 +602,14 @@ cli = ["click (>=5.0)"]
 
 [[package]]
 name = "selenium"
-version = "4.46.0"
+version = "4.47.0"
 description = "Official Python bindings for Selenium WebDriver"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "selenium-4.46.0-py3-none-any.whl", hash = "sha256:f03e864770a21ab32009961c9d015cb2c6275eba45c926c272e02d90af423aad"},
-    {file = "selenium-4.46.0.tar.gz", hash = "sha256:54f7e1a4df5f7508ac8c38ce2ea584db1b27083dd79962b22524219219df5cbe"},
+    {file = "selenium-4.47.0-py3-none-any.whl", hash = "sha256:2eac6b8e7c017f57ecc40820383da8881a6fd7a90ea555c1b0af322f2344b347"},
+    {file = "selenium-4.47.0.tar.gz", hash = "sha256:4f6667c23080646e045fb91d2039687e88f549d667961f6ce85832b17384b68e"},
 ]
 
 [package.dependencies]
@@ -704,14 +704,14 @@ files = [
 
 [[package]]
 name = "trio"
-version = "0.33.0"
+version = "0.34.0"
 description = "A friendly Python library for async concurrency and I/O"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "trio-0.33.0-py3-none-any.whl", hash = "sha256:3bd5d87f781d9b0192d592aef28691f8951d6c2e41b7e1da4c25cde6c180ae9b"},
-    {file = "trio-0.33.0.tar.gz", hash = "sha256:a29b92b73f09d4b48ed249acd91073281a7f1063f09caba5dc70465b5c7aa970"},
+    {file = "trio-0.34.0-py3-none-any.whl", hash = "sha256:6c7c9f49917694dcdcd5f67abd168df5599eca480d61f29854d17a61a75c2f05"},
+    {file = "trio-0.34.0.tar.gz", hash = "sha256:63b9485408bdfdde544fced107045a8c0086cdc4bd0ef2f797b9e0dd111b964b"},
 ]
 
 [package.dependencies]

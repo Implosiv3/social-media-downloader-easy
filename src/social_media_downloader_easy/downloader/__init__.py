@@ -54,13 +54,13 @@ class SocialMediaDownloader:
         """
 
         # Experimental and not used yet
-        self.snapsave: '_SnapsaveDownloader' = _SnapsaveDownloader(self)
+        self.snapsave: '_SnapsaveDownloader' = _SnapsaveDownloader()
         """
         Shortcut to the Snapsave app functionality,
         that is able to download a lot of different
         types of videos.
         """
-        self.dl_arsya_biz_id: '_DlArsyaBizIdDownloader' = _DlArsyaBizIdDownloader(self)
+        self.dl_arsya_biz_id: '_DlArsyaBizIdDownloader' = _DlArsyaBizIdDownloader()
         """
         Shortcut to the DlArsyaBizId app functionality,
         that is able to download a lot of different
