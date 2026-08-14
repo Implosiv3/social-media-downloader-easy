@@ -777,18 +777,18 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
 [[package]]
 name = "web-scraper-easy"
-version = "0.0.2"
+version = "0.0.3"
 description = "Web scraper, but made easy"
 optional = false
 python-versions = "<3.14,>=3.8"
 groups = ["main"]
 files = [
-    {file = "web_scraper_easy-0.0.2-py3-none-any.whl", hash = "sha256:40148ee9ca1581bf7bfdbde0f53cf533d7c1b7af2dccaaa8918b081cd696b74b"},
-    {file = "web_scraper_easy-0.0.2.tar.gz", hash = "sha256:043a0f26290b3423176f1ebc19d800e0d605950272dd6bcd2b0be1f5899129a3"},
+    {file = "web_scraper_easy-0.0.3-py3-none-any.whl", hash = "sha256:85ac4bdbbd45bd1cffa5e52ec58ea8375e3316ad19af64370e4aceeb1a6bb8db"},
+    {file = "web_scraper_easy-0.0.3.tar.gz", hash = "sha256:1099d62e2b968272d450632d4aa0983b71b819a65895d04396e7a8bde80a563a"},
 ]
 
 [package.dependencies]
-env_easy = ">=0.0.3,<1.0.0"
+env_easy = ">=0.0.4,<1.0.0"
 pystandards = ">=0.0.17,<1.0.0"
 selenium = ">=4.27.1,<9999.0.0"
 
@@ -827,4 +827,4 @@ h11 = ">=0.16.0,<1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.14"
-content-hash = "8ded96383e79b569d72c14607928149c7972cd8041c1eb9d1e524860634c77d5"
+content-hash = "abe425efd64622a168b0f62c1660678b31b9db68dd22e5ae14d1e4880ce28af9"
