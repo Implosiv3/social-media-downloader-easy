@@ -89,7 +89,7 @@ async def _short_tiktok_url_to_long_tiktok_url(
     to its long format.
     """
     if not TiktokVideoLinkRegularExpression.TIKTOK_VIDEO_SHORT_REGEX.is_valid_url(url):
-        raise Exception('No "url" provided is not a short tiktok url.')
+        raise Exception('The "url" provided is not a short tiktok url.')
     
     async with HttpClient(do_follow_redirects = True) as client:
         response = await client.get.complete(

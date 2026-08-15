@@ -334,20 +334,20 @@ zstd = ["zstandard (>=0.18.0)"]
 
 [[package]]
 name = "httpx-easy"
-version = "0.0.2"
+version = "0.1.0"
 description = "Httpx, but made easy"
 optional = false
 python-versions = "<3.14,>=3.8"
 groups = ["main"]
 files = [
-    {file = "httpx_easy-0.0.2-py3-none-any.whl", hash = "sha256:50a5ce6506c88e3c7fa6d9930061af3be4381f842e9e7980530dbaa8709e4d2f"},
-    {file = "httpx_easy-0.0.2.tar.gz", hash = "sha256:6f26e0a94dc547d302d704900dc8c65c61096ce4c7cf06ee41c5955bb483030d"},
+    {file = "httpx_easy-0.1.0-py3-none-any.whl", hash = "sha256:6993db4097fc8d5ce504d218c06e0b0629db26ed1d237d63b81e6e5db866d81f"},
+    {file = "httpx_easy-0.1.0.tar.gz", hash = "sha256:919687c51ca05a77e0205aae2c4c80f2224ddd9762590b00c09b8e0796da3c6a"},
 ]
 
 [package.dependencies]
 aiofiles = ">=24.1.0,<9999.9.9"
 httpx = ">=0.28.1,<9999.9.9"
-pystandards = ">=0.0.17,<1.0.0"
+pystandards = ">=0.0.18,<1.0.0"
 python-dotenv = ">=0.0.1,<9999.0.0"
 
 [[package]]
@@ -510,14 +510,14 @@ files = [
 
 [[package]]
 name = "pystandards"
-version = "0.0.17"
+version = "0.0.18"
 description = "Standards but in Python"
 optional = false
 python-versions = "<3.14,>=3.8"
 groups = ["main"]
 files = [
-    {file = "pystandards-0.0.17-py3-none-any.whl", hash = "sha256:3a51c9d671bf85ef899fa61451b5939588fd8468cb9c1841134fc4792cb59b51"},
-    {file = "pystandards-0.0.17.tar.gz", hash = "sha256:68d0ee1a5bb4eb45250fba442f008c74277a76ecd736a7dc8fe56cd8b920ac15"},
+    {file = "pystandards-0.0.18-py3-none-any.whl", hash = "sha256:f85d2100596fa516190e34cfc8164ea8a4c38226e41a4f34c06f00dc2559e355"},
+    {file = "pystandards-0.0.18.tar.gz", hash = "sha256:d76438015d2db0d41cf275c097aa7e2ac29fa04adea4d9ec24acb8d14945aa72"},
 ]
 
 [package.dependencies]
@@ -827,4 +827,4 @@ h11 = ">=0.16.0,<1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.14"
-content-hash = "abe425efd64622a168b0f62c1660678b31b9db68dd22e5ae14d1e4880ce28af9"
+content-hash = "8bcec10306cd555f6d23a42737db51b64dbc29b99c3c03f84f40b7d2a44e8c1e"

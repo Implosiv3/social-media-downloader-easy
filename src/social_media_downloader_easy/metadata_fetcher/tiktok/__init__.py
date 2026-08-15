@@ -1,12 +1,13 @@
 from social_media_downloader_easy.downloader.tiktok.url_parser import TiktokUrlParser
 from social_media_downloader_easy.downloader.tiktok.url_parser import _get_id_and_username_from_long_url
-from social_media_downloader_easy.metadata_fetcher.tiktok.dataclasses import TiktokVideoMetadata
+from social_media_downloader_easy.metadata_fetcher.tiktok.dataclasses import TiktokVideoMetadata, TikTokMetadataEmbed
+from httpx_easy import HttpClient
 
 
 class _TiktokMetadataFetcher:
     """
     Class to fetch metadata from the videos that
-    are published in the Tiktok platofmr.
+    are published in the Tiktok platform.
     """
 
     def __init__(
@@ -23,13 +24,36 @@ class _TiktokMetadataFetcher:
         """
 
 
-    def get_metadata(
+    async def get_metadata(
+        self,
+        video_url: str
+    ) -> TikTokMetadataEmbed:
+        """
+        Get the metadata of the Tiktok video with
+        the `video_url` given.
+        """
+        # TODO: Validate tiktok url (can be short or long)
+        endpoint_url = f'https://www.tiktok.com/oembed?url={video_url}'
+        
+        # Example of a valid endpoint url
+        # https://www.tiktok.com/oembed?url=https://vm.tiktok.com/ZN8eRVqJa
+
+        async with HttpClient() as http_client:
+            async with await http_client.get.complete(endpoint_url) as response:
+                return TikTokMetadataEmbed.from_dict(response.json())
+
+
+    def get_metadata_with_chrome_scraper(
         self,
         video_url: str
     ) -> TiktokVideoMetadata:
         """
         Get the metadata of the Tiktok video with
         the `video_url` given.
+
+        This is heavier and slower than the
+        'get_metadata' method due to the web
+        scraper that is needed.
         """
         self._validate_url(video_url)
 
