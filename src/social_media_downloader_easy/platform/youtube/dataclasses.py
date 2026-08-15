@@ -1,25 +1,46 @@
-from social_media_downloader_easy.platform.youtube.regex import YoutubeVideoUrlkRegularExpression
+from social_media_downloader_easy.platform.youtube.regex import YoutubeVideoUrlRegularExpression
 from social_media_downloader_easy.platform.youtube.enums import YoutubeUrlType
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from urllib.parse import parse_qs, urlparse
 from typing import Union
 
 import re
 
 
-@dataclass(frozen = True)
+@dataclass
 class YoutubeVideoUrl:
     """
     Class to handle a Youtube video url and
     also parse or validate them.
     """
 
-    video_id: str
-    url_type: YoutubeUrlType
+    url: str = field
     """
+    The original url that was provided when
+    initializing the instance.
+    """
+
+    _url_type: YoutubeUrlType = field(
+        init = False
+    )
+    """
+    *For internal use only*
+
     The original url type this instance was
     built with.
     """
+    _video_id: Union[str, None] = field(
+        init = False,
+        default = None,
+        repr = False,
+    )
+    """
+    *For internal use only*
+
+    The video id autocalculated after being
+    initialized.
+    """
+
 
     @property
     def watch_url(
@@ -29,9 +50,9 @@ class YoutubeVideoUrl:
         The long format of the Youtube video.
 
         It is like this:
-        - https://www.youtube.com/watch?v={self.video_id}
+        - https://www.youtube.com/watch?v={video_id}
         """
-        return f'https://www.youtube.com/watch?v={self.video_id}'
+        return f'https://www.youtube.com/watch?v={self._video_id}'
 
 
     @property
@@ -43,9 +64,9 @@ class YoutubeVideoUrl:
         middle.
 
         It is like this:
-        - https://www.youtube.com/v/{self.video_id}
+        - https://www.youtube.com/v/{video_id}
         """
-        return f'https://www.youtube.com/v/{self.video_id}'
+        return f'https://www.youtube.com/v/{self._video_id}'
     
 
     @property
@@ -56,9 +77,9 @@ class YoutubeVideoUrl:
         The short format of the Youtube video.
 
         It is like this:
-        - https://youtu.be/{self.video_id}
+        - https://youtu.be/{video_id}
         """
-        return f'https://youtu.be/{self.video_id}'
+        return f'https://youtu.be/{self._video_id}'
 
 
     @property
@@ -70,9 +91,9 @@ class YoutubeVideoUrl:
         section.
 
         It is like this:
-        - https://www.youtube.com/shorts/{self.video_id}
+        - https://www.youtube.com/shorts/{video_id}
         """
-        return f'https://www.youtube.com/shorts/{self.video_id}'
+        return f'https://www.youtube.com/shorts/{self._video_id}'
 
 
     @property
@@ -84,9 +105,23 @@ class YoutubeVideoUrl:
         short.
 
         It is like this:
-        - `https://www.youtube.com/embed/{self.video_id}`
+        - `https://www.youtube.com/embed/{video_id}`
         """
-        return f'https://www.youtube.com/embed/{self.video_id}'
+        return f'https://www.youtube.com/embed/{self._video_id}'
+
+
+    @property
+    def embed_nocookie_url(
+        self
+    ) -> str:
+        """
+        The url to embed the Youtube video or
+        short through the nocookie service.
+
+        It is like this:
+        - `https://youtube-nocookie.com/embed/{video_id}`
+        """
+        return f'https://youtube-nocookie.com/embed/{self._video_id}'
 
 
     @property
@@ -97,9 +132,106 @@ class YoutubeVideoUrl:
         The direct url to get the thumbnail.
 
         It is like this:
-        - https://img.youtube.com/vi/{self.video_id}/oardefault.jpg
+        - https://img.youtube.com/vi/{video_id}/oardefault.jpg
         """
-        return f'https://img.youtube.com/vi/{self.video_id}/oardefault.jpg'
+        return f'https://img.youtube.com/vi/{self._video_id}/oardefault.jpg'
+
+
+    @property
+    def video_id(
+        self
+    ) -> str:
+        """
+        The id of the video.
+        """
+        return self._video_id
+
+
+    def __post_init__(
+        self
+    ):
+        self._detect_url_type()
+        self._extract_video_id()
+
+
+    def _detect_url_type(
+        self
+    ) -> str:
+        """
+        *For internal use only*
+
+        Detect the url type based on the `url`
+        provided when initialized.
+        """
+        if re.match(
+            YoutubeVideoUrlRegularExpression.YOUTUBE_WATCH_REGEX.value,
+            self.url,
+        ):
+            self._url_type = YoutubeUrlType.WATCH
+            return
+
+        if re.match(
+            YoutubeVideoUrlRegularExpression.YOUTUBE_SHORT_URL_REGEX.value,
+            self.url,
+        ):
+            self._url_type = YoutubeUrlType.SHORT_URL
+            return
+
+        if re.match(
+            YoutubeVideoUrlRegularExpression.YOUTUBE_SHORTS_REGEX.value,
+            self.url,
+        ):
+            self._url_type = YoutubeUrlType.SHORTS
+            return
+
+        if re.match(
+            YoutubeVideoUrlRegularExpression.YOUTUBE_EMBED_REGEX.value,
+            self.url,
+        ):
+            self._url_type = YoutubeUrlType.EMBED
+            return
+
+        if re.match(
+            YoutubeVideoUrlRegularExpression.YOUTUBE_V_REGEX.value,
+            self.url,
+        ):
+            self._url_type = YoutubeUrlType.V
+            return
+
+        raise ValueError(f'Unsupported Youtube video url: {self.url}')
+
+
+    def _extract_video_id(
+        self
+    ) -> None:
+        """
+        *For internal use only*
+
+        Extract the video id from the original URL.
+        """
+        if self._url_type == YoutubeUrlType.WATCH:
+            self._video_id = parse_qs(
+                urlparse(self.url).query
+            )['v'][0]
+            return
+
+        if self._url_type == YoutubeUrlType.SHORT_URL:
+            self._video_id = urlparse(self.url).path.strip('/').split('/')[0]
+            return
+
+        if self._url_type == YoutubeUrlType.SHORTS:
+            self._video_id = urlparse(self.url).path.strip('/').split('/')[1]
+            return
+
+        if self._url_type == YoutubeUrlType.EMBED:
+            self._video_id = urlparse(self.url).path.strip('/').split('/')[1]
+            return
+
+        if self._url_type == YoutubeUrlType.V:
+            self._video_id = urlparse(self.url).path.strip('/').split('/')[1]
+            return
+
+        raise ValueError(f'Unsupported Youtube url type: {self._url_type}')
 
 
     @classmethod
@@ -112,124 +244,125 @@ class YoutubeVideoUrl:
         includes the `video_id` provided, if
         valid.
         """
-        if not YoutubeVideoUrlkRegularExpression.YOUTUBE_VIDEO_ID_REGEX.is_valid(video_id):
-            raise ValueError(f'Invalid YouTube video ID: {video_id}')
+        if not YoutubeVideoUrlRegularExpression.YOUTUBE_VIDEO_ID_REGEX.is_valid(video_id):
+            raise ValueError(f'Invalid YouTube video id: {video_id}')
+
+        url = f'https://www.youtube.com/watch?v={video_id}'
 
         return cls(
-            video_id = video_id,
-            url_type = YoutubeUrlType.WATCH,
+            url = url
         )
 
 
-    @classmethod
-    def parse(
-        cls,
-        url: str
-    ) -> Union['YoutubeVideoUrl', None]:
-        """
-        Parse the Youtube `url` provided and return
-        a `YoutubeVideoUrl` instance if parseable.
+    # @classmethod
+    # def parse(
+    #     cls,
+    #     url: str
+    # ) -> Union['YoutubeVideoUrl', None]:
+    #     """
+    #     Parse the Youtube `url` provided and return
+    #     a `YoutubeVideoUrl` instance if parseable.
 
-        This method is accepting:
-        - https://www.youtube.com/watch?v=dQw4w9WgXcQ
-        - https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=30s
-        - https://www.youtube.com/watch?feature=share&v=dQw4w9WgXcQ
-        - https://youtu.be/dQw4w9WgXcQ
-        - https://youtu.be/dQw4w9WgXcQ?t=30
-        - https://www.youtube.com/shorts/dQw4w9WgXcQ
-        - https://www.youtube.com/embed/dQw4w9WgXcQ
-        - https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ
-        - https://www.youtube.com/v/dQw4w9WgXcQ
-        """
-        parsed = urlparse(url)
+    #     This method is accepting:
+    #     - https://www.youtube.com/watch?v=dQw4w9WgXcQ
+    #     - https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=30s
+    #     - https://www.youtube.com/watch?feature=share&v=dQw4w9WgXcQ
+    #     - https://youtu.be/dQw4w9WgXcQ
+    #     - https://youtu.be/dQw4w9WgXcQ?t=30
+    #     - https://www.youtube.com/shorts/dQw4w9WgXcQ
+    #     - https://www.youtube.com/embed/dQw4w9WgXcQ
+    #     - https://www.youtube-nocookie.com/embed/dQw4w9WgXcQ
+    #     - https://www.youtube.com/v/dQw4w9WgXcQ
+    #     """
+    #     parsed = urlparse(url)
 
-        if parsed.scheme not in ('http', 'https'):
-            return None
+    #     if parsed.scheme not in ('http', 'https'):
+    #         return None
 
-        hostname = parsed.hostname
-        if hostname is None:
-            return None
+    #     hostname = parsed.hostname
+    #     if hostname is None:
+    #         return None
 
-        hostname = hostname.lower()
+    #     hostname = hostname.lower()
 
-        # youtu.be/VIDEO_ID
-        if hostname == 'youtu.be':
-            video_id = parsed.path.strip('/').split('/')[0]
+    #     # youtu.be/VIDEO_ID
+    #     if hostname == 'youtu.be':
+    #         video_id = parsed.path.strip('/').split('/')[0]
 
-            if YoutubeVideoUrlkRegularExpression.YOUTUBE_VIDEO_ID_REGEX.fullmatch(video_id, re.IGNORECASE):
-                return cls(
-                    video_id = video_id,
-                    url_type = YoutubeUrlType.SHORT_URL,
-                )
+    #         if YoutubeVideoUrlRegularExpression.YOUTUBE_VIDEO_ID_REGEX.fullmatch(video_id, re.IGNORECASE):
+    #             return cls(
+    #                 video_id = video_id,
+    #                 url_type = YoutubeUrlType.SHORT_URL,
+    #             )
 
-            return None
+    #         return None
 
-        # youtube.com / www.youtube.com / youtube-nocookie.com
-        if hostname not in {
-            'youtube.com',
-            'www.youtube.com',
-            'youtube-nocookie.com',
-            'www.youtube-nocookie.com',
-        }:
-            return None
+    #     # youtube.com / www.youtube.com / youtube-nocookie.com
+    #     if hostname not in {
+    #         'youtube.com',
+    #         'www.youtube.com',
+    #         'youtube-nocookie.com',
+    #         'www.youtube-nocookie.com',
+    #     }:
+    #         return None
 
-        path = parsed.path.rstrip('/')
+    #     path = parsed.path.rstrip('/')
 
-        # /watch?v=VIDEO_ID
-        if path == '/watch':
-            video_id = parse_qs(parsed.query).get('v', [None])[0]
+    #     # /watch?v=VIDEO_ID
+    #     if path == '/watch':
+    #         video_id = parse_qs(parsed.query).get('v', [None])[0]
 
-            if (
-                video_id and
-                YoutubeVideoUrlkRegularExpression.YOUTUBE_VIDEO_ID_REGEX.fullmatch(video_id, re.IGNORECASE)
-            ):
-                return cls(
-                    video_id = video_id,
-                    url_type = YoutubeUrlType.WATCH,
-                )
+    #         if (
+    #             video_id and
+    #             YoutubeVideoUrlRegularExpression.YOUTUBE_VIDEO_ID_REGEX.fullmatch(video_id, re.IGNORECASE)
+    #         ):
+    #             return cls(
+    #                 video_id = video_id,
+    #                 url_type = YoutubeUrlType.WATCH,
+    #             )
 
-            return None
+    #         return None
 
-        # /shorts/VIDEO_ID
-        match = re.fullmatch(
-            rf'/shorts/({YoutubeVideoUrlkRegularExpression.YOUTUBE_VIDEO_ID_REGEX.value})',
-            path,
-            re.IGNORECASE
-        )
+    #     # /shorts/VIDEO_ID
+    #     match = re.fullmatch(
+    #         rf'/shorts/({YoutubeVideoUrlRegularExpression.YOUTUBE_VIDEO_ID_REGEX.value})',
+    #         path,
+    #         re.IGNORECASE
+    #     )
 
-        if match:
-            return cls(
-                video_id = match.group(1),
-                url_type = YoutubeUrlType.SHORTS,
-            )
+    #     if match:
+    #         return cls(
+    #             video_id = match.group(1),
+    #             url_type = YoutubeUrlType.SHORTS,
+    #         )
 
-        # /embed/VIDEO_ID
-        match = re.fullmatch(
-            rf'/embed/({YoutubeVideoUrlkRegularExpression.YOUTUBE_VIDEO_ID_REGEX.value})',
-            path,
-            re.IGNORECASE
-        )
+    #     # /embed/VIDEO_ID
+    #     match = re.fullmatch(
+    #         rf'/embed/({YoutubeVideoUrlRegularExpression.YOUTUBE_VIDEO_ID_REGEX.value})',
+    #         path,
+    #         re.IGNORECASE
+    #     )
 
-        if match:
-            return cls(
-                video_id = match.group(1),
-                url_type = YoutubeUrlType.EMBED,
-            )
+    #     if match:
+    #         return cls(
+    #             video_id = match.group(1),
+    #             url_type = YoutubeUrlType.EMBED,
+    #         )
 
-        # /v/VIDEO_ID
-        match = re.fullmatch(
-            rf'/v/({YoutubeVideoUrlkRegularExpression.YOUTUBE_VIDEO_ID_REGEX.value})',
-            path,
-            re.IGNORECASE
-        )
+    #     # /v/VIDEO_ID
+    #     match = re.fullmatch(
+    #         rf'/v/({YoutubeVideoUrlRegularExpression.YOUTUBE_VIDEO_ID_REGEX.value})',
+    #         path,
+    #         re.IGNORECASE
+    #     )
 
-        if match:
-            return cls(
-                video_id = match.group(1),
-                url_type = YoutubeUrlType.V,
-            )
+    #     if match:
+    #         return cls(
+    #             video_id = match.group(1),
+    #             url_type = YoutubeUrlType.V,
+    #         )
 
-        return None
+    #     return None
 
 
     @classmethod
@@ -241,4 +374,9 @@ class YoutubeVideoUrl:
         Check if the `url` provided is valid Youtube
         video url or not.
         """
-        return cls.parse(url) is not None
+        try:
+            cls(url)
+        except Exception as e:
+            return False
+
+        return True
