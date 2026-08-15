@@ -80,7 +80,7 @@ class _TiktokMetadataFetcher:
         )
 
         current_url = self._metadata_fetcher._chrome_scraper.current_url
-        video_id, username = _get_id_and_username_from_long_url(current_url)
+        id, username = _get_id_and_username_from_long_url(current_url)
 
         description = self._metadata_fetcher._chrome_scraper.execute_script("""
             const root = arguments[0];
@@ -111,7 +111,7 @@ class _TiktokMetadataFetcher:
         title = self._metadata_fetcher._chrome_scraper.driver.title.replace(' | TikTok', '')
 
         return TiktokVideoMetadata(
-            id = video_id,
+            id = id,
             username = username,
             title = title,
             description = description

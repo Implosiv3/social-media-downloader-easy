@@ -10,10 +10,10 @@ class InstagramUrl:
 
     def __init__(
         self,
-        video_id: str,
+        id: str,
         url: str
     ):
-        self.video_id: str = video_id
+        self.id: str = id
         """
         The id of the video.
         """

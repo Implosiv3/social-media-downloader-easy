@@ -29,9 +29,9 @@ class _YoutubeMetadataFetcher:
         video with the `video_url` provided.
         """
         # TODO: We need the id of the youtube video url
-        video_id = 'aRVd1QeyTiE'
+        id = 'aRVd1QeyTiE'
 
-        endpoint_url = f'https://img.youtube.com/vi/{video_id}/oardefault.jpg'
+        endpoint_url = f'https://img.youtube.com/vi/{id}/oardefault.jpg'
 
         # Example of a valid endpoint url
         # 'https://img.youtube.com/vi/aRVd1QeyTiE/oardefault.jpg'

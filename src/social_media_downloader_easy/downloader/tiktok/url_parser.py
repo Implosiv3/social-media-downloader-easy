@@ -55,7 +55,7 @@ class TiktokUrlParser:
 
         return TiktokUrl(
             username = username,
-            video_id = id,
+            id = id,
             url = url
         )
 

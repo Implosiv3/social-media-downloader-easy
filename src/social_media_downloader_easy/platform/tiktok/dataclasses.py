@@ -1,7 +1,6 @@
-from social_media_downloader_easy.platform.tiktok.regex import TiktokVideoUrlRegularExpression
+from social_media_downloader_easy.platform.tiktok.regex import TiktokPostUrlRegularExpression
 from social_media_downloader_easy.platform.tiktok.utils import get_username_and_video_id_from_long_tiktok_url, short_tiktok_url_to_long_tiktok_url, tiktok_video_id_to_long_tiktok_url
 from social_media_downloader_easy.platform.tiktok.enums import TikTokUrlType
-from urllib.parse import urlparse
 from dataclasses import dataclass, field
 from typing import Union
 
@@ -10,12 +9,12 @@ import re
 
 
 @dataclass
-class TiktokVideoUrl:
+class TiktokPostUrl:
     """
     Dataclass to hold the information about
-    a TikTok video URL.
+    a TikTok post URL.
 
-    A Tiktok video url will always have the
+    A Tiktok post url will always have the
     long format version, but the short format
     depends on how it was instantiated.
     """
@@ -62,7 +61,7 @@ class TiktokVideoUrl:
     The username autocalculated after being
     initialized.
     """
-    _video_id: Union[str, None] = field(
+    _id: Union[str, None] = field(
         init = False,
         default = None,
         repr = False,
@@ -70,7 +69,7 @@ class TiktokVideoUrl:
     """
     *For internal use only*
 
-    The video id autocalculated after being
+    The post id autocalculated after being
     initialized.
     """
 
@@ -96,10 +95,10 @@ class TiktokVideoUrl:
         )
 
         # Set metadata
-        username, video_id = get_username_and_video_id_from_long_tiktok_url(long_url)
+        username, id = get_username_and_video_id_from_long_tiktok_url(long_url)
 
         self._username = username
-        self._video_id = video_id
+        self._id = id
         self._long_url = long_url
 
         return self._long_url
@@ -122,17 +121,17 @@ class TiktokVideoUrl:
 
 
     @property
-    def video_id(
+    def id(
         self
     ) -> str:
         """
         The id of the Tiktok video, taht is
         based on its long format url.
         """
-        if self._video_id is None:
+        if self._id is None:
             self.long_url
 
-        return self._video_id
+        return self._id
 
 
     def __post_init__(
@@ -151,7 +150,7 @@ class TiktokVideoUrl:
         provided when initialized.
         """
         if re.fullmatch(
-            TiktokVideoUrlRegularExpression.TIKTOK_VIDEO_URL_REGEX.value,
+            TiktokPostUrlRegularExpression.TIKTOK_POST_URL_REGEX.value,
             self.url,
             re.IGNORECASE,
         ):
@@ -159,7 +158,7 @@ class TiktokVideoUrl:
             return
 
         match = re.fullmatch(
-            TiktokVideoUrlRegularExpression.TIKTOK_SHORT_URL_REGEX.value,
+            TiktokPostUrlRegularExpression.TIKTOK_SHORT_URL_REGEX.value,
             self.url,
             re.IGNORECASE,
         )
@@ -171,81 +170,22 @@ class TiktokVideoUrl:
         raise ValueError(f'Invalid TikTok URL: {self.url}')
     
 
-    # @classmethod
-    # def parse(
-    #     cls,
-    #     url: str
-    # ) -> Union['TiktokVideoUrl', None]:
-    #     parsed = urlparse(url)
-
-    #     if parsed.scheme not in ('http', 'https'):
-    #         raise ValueError(f'Invalid TikTok URL scheme: {url}')
-
-    #     hostname = (parsed.hostname or '').lower()
-    #     path = parsed.path.rstrip('/')
-
-    #     # ---------------------------------------------------------
-    #     # Canonical:
-    #     # https://www.tiktok.com/@username/video/123456789
-    #     # ---------------------------------------------------------
-
-    #     if hostname in {
-    #         'tiktok.com',
-    #         'www.tiktok.com',
-    #         'm.tiktok.com',
-    #     }:
-    #         match = re.fullmatch(
-    #             rf'/@[^/]+/video/({TiktokVideoUrlRegularExpression.TIKTOK_VIDEO_ID_REGEX.value})',
-    #             path,
-    #         )
-
-    #         if match:
-    #             return cls(
-    #                 video_id = match.group(1),
-    #                 url_type = TikTokUrlType.VIDEO,
-    #                 url = url,
-    #             )
-
-    #         return None
-
-    #     # ---------------------------------------------------------
-    #     # Short links:
-    #     # https://vm.tiktok.com/Z...
-    #     # https://vt.tiktok.com/Z...
-    #     # ---------------------------------------------------------
-
-    #     if hostname in {
-    #         'vm.tiktok.com',
-    #         'vt.tiktok.com',
-    #     }:
-    #         if path:
-    #             return cls(
-    #                 video_id = None,
-    #                 url_type = TikTokUrlType.SHORT_URL,
-    #                 url = url,
-    #             )
-
-    #         return None
-
-    #     return None
-
-
     @classmethod
-    def from_video_id(
+    def from_id(
         cls,
-        video_id: str
-    ) -> 'TiktokVideoUrl':
+        id: str
+    ) -> 'TiktokPostUrl':
         """
-        Get a `TiktokVideoUrl` instance of the Tiktok
-        video with the `video_id` provided.
+        Get a `TiktokPostUrl` instance of the Tiktok
+        video with the `id` provided.
         """
-        if not TiktokVideoUrlRegularExpression.TIKTOK_VIDEO_ID_REGEX.is_valid(video_id):
-            raise ValueError(f'Invalid Tiktok video ID: {video_id}')
+        if not TiktokPostUrlRegularExpression.TIKTOK_POST_ID_REGEX.is_valid(id):
+            raise ValueError(f'Invalid Tiktok video ID: {id}')
 
         # We need to do a redirect in order to obtain
         # the long format url
 
-        url = tiktok_video_id_to_long_tiktok_url(video_id)
+        url = tiktok_video_id_to_long_tiktok_url(id)
         print(url)
 
         return cls(
@@ -257,13 +197,13 @@ class TiktokVideoUrl:
     def from_shortcode(
         cls,
         shortcode: str
-    ) -> 'TiktokVideoUrl':
+    ) -> 'TiktokPostUrl':
         """
-        Get a `TiktokVideoUrl` instance of the Tiktok
+        Get a `TiktokPostUrl` instance of the Tiktok
         video with the `shortcode` provided, which is
         the sharing shortcode.
         """
-        if not TiktokVideoUrlRegularExpression.TIKTOK_SHORTCODE_REGEX.is_valid(shortcode):
+        if not TiktokPostUrlRegularExpression.TIKTOK_SHORTCODE_REGEX.is_valid(shortcode):
             raise ValueError(f'Invalid Tiktok shortcode: {shortcode}')
 
         return cls(
@@ -282,7 +222,8 @@ class TiktokVideoUrl:
         """
         try:
             cls(url)
-        except:
+        except Exception as e:
+            print(e)
             return False
 
         return True

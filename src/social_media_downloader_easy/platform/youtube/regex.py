@@ -1,23 +1,21 @@
 from pystandards.regex import RegularExpression
 
-import re
 
-
-class YoutubeVideoUrlRegularExpression(
+class YoutubePostUrlRegularExpression(
     RegularExpression
 ):
     """
     Regular expressions for Youtube video links.
     """
 
-    YOUTUBE_VIDEO_ID_REGEX = r'[A-Za-z0-9_-]{11}'
+    YOUTUBE_POST_ID_REGEX = r'[A-Za-z0-9_-]{11}'
     """
     The regular expression for the video ID part.
     """
     YOUTUBE_WATCH_REGEX = (
         rf'https?://(?:www\.)?youtube\.com/watch\?'
         rf'(?:[^#&]+&)*'
-        rf'v={YOUTUBE_VIDEO_ID_REGEX}'
+        rf'v={YOUTUBE_POST_ID_REGEX}'
         rf'(?:&[^#]*)?'
         rf'(?:#.*)?'
     )
@@ -33,7 +31,7 @@ class YoutubeVideoUrlRegularExpression(
 
     YOUTUBE_SHORT_URL_REGEX = (
         rf'https?://youtu\.be/'
-        rf'{YOUTUBE_VIDEO_ID_REGEX}'
+        rf'{YOUTUBE_POST_ID_REGEX}'
         rf'(?:[/?#].*)?'
     )
     """
@@ -47,7 +45,7 @@ class YoutubeVideoUrlRegularExpression(
 
     YOUTUBE_SHORTS_REGEX = (
         rf'https?://(?:www\.)?youtube\.com/shorts/'
-        rf'{YOUTUBE_VIDEO_ID_REGEX}'
+        rf'{YOUTUBE_POST_ID_REGEX}'
         rf'(?:[/?#].*)?'
     )
     """
@@ -59,7 +57,7 @@ class YoutubeVideoUrlRegularExpression(
 
     YOUTUBE_EMBED_REGEX = (
         rf'https?://(?:www\.)?youtube(?:-nocookie)?\.com/embed/'
-        rf'{YOUTUBE_VIDEO_ID_REGEX}'
+        rf'{YOUTUBE_POST_ID_REGEX}'
         rf'(?:[/?#].*)?'
     )
     """
@@ -73,7 +71,7 @@ class YoutubeVideoUrlRegularExpression(
 
     YOUTUBE_V_REGEX = (
         rf'https?://(?:www\.)?youtube\.com/v/'
-        rf'{YOUTUBE_VIDEO_ID_REGEX}'
+        rf'{YOUTUBE_POST_ID_REGEX}'
         rf'(?:[/?#].*)?'
     )
     """

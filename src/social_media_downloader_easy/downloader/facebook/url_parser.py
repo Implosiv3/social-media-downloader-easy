@@ -55,7 +55,7 @@ class FacebookUrlParser:
             raise Exception('The "url" provided is valid but not supported because it does not include the real video id.')
 
         return FacebookUrl(
-            video_id = id,
+            id = id,
             url = url
         )
 

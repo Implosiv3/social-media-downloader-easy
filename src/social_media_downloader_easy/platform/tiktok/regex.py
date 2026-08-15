@@ -2,14 +2,14 @@ from pystandards.regex import RegularExpression
 
 
 
-class TiktokVideoUrlRegularExpression(
+class TiktokPostUrlRegularExpression(
     RegularExpression
 ):
     """
     Regular expressions for Tiktok video links.
     """
 
-    TIKTOK_VIDEO_ID_REGEX = r"\d+"
+    TIKTOK_POST_ID_REGEX = r"\d+"
     """
     The real video id, which is a long number that
     comes after the `/video/{id}` part.
@@ -22,14 +22,14 @@ class TiktokVideoUrlRegularExpression(
     The redirect shortcode, which is an 
     alphanumerical value that will redirect you to
     the long format that includes the real id (the
-    one for the `TIKTOK_VIDEO_ID_REGEX`).
+    one for the `TIKTOK_POST_ID_REGEX`).
 
     This one will come in an url like the following:
     - https://vm.tiktok.com/ZMxxxxxx/
     """
-    TIKTOK_VIDEO_URL_REGEX = (
+    TIKTOK_POST_URL_REGEX = (
         rf'^https?://(?:www\.|m\.)?tiktok\.com/@([^/]+)/video/'
-        rf'({TIKTOK_VIDEO_ID_REGEX})(?:[/?#].*)?$'
+        rf'({TIKTOK_POST_ID_REGEX})(?:[/?#].*)?$'
     )
     """
     The long url that includes the username and

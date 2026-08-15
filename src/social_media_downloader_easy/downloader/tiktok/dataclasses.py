@@ -17,7 +17,7 @@ class TiktokUrl:
     The user who the video belongs to.
     """
 
-    video_id: str
+    id: str
     """
     The id of the video.
     """
