@@ -107,3 +107,6 @@ async def test_mixed():
 
             assert mixed_video_downloaded.filename == output_filename
 
+
+# TODO: Test the new '_new' methods
+

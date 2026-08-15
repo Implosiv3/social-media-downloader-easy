@@ -1,6 +1,6 @@
 from social_media_downloader_easy.downloader.facebook.consts import SERVERLESS_TOOLY_GATEWAY_DOWNLOAD_FACEBOOK_VIDEO_ENDPOINT_URL, SERVERLESS_TOOLY_GATEWAY_HEADERS
 from social_media_downloader_easy.downloader.facebook.regex import FacebookVideoLinkRegularExpression
-from file_easy.dataclasses.file_resource import FileResource
+from social_media_downloader_easy.platform.facebook.dataclasses import FacebookPostUrl
 
 import re
 
@@ -24,12 +24,46 @@ class _FacebookDownloader:
         The reference to the `SocialMediaDownloader` parent.
         """
 
+
+    async def get_download_url_new(
+        self,
+        url: str
+    ) -> str:
+        """
+        Get the url to download the video from
+        Facebook with the `url` given.
+        """
+        url = FacebookPostUrl(url).reel_url
+
+        params = {
+            'url': url
+        }
+
+        with self._social_media_downloader._file_downloader.follow_redirects(True):
+            async with await self._social_media_downloader._file_downloader.client.get.stream(
+                url = SERVERLESS_TOOLY_GATEWAY_DOWNLOAD_FACEBOOK_VIDEO_ENDPOINT_URL,
+                headers = SERVERLESS_TOOLY_GATEWAY_HEADERS,
+                params = params
+            ) as response:
+                await response.aread()
+                json_response = response.json()
+                video_url = json_response['videos']['hd']['url']
+
+                return video_url
+
+
+    """
+    TODO: This must be removed if the new method
+    is working, because the new one is accepting
+    and managing the urls properly, and this old
+    method is limited and raising exceptions when
+    it shouldn't.
+    """
     async def get_download_url(
         self,
         # TODO: Accept IDs also
-        url: str,
-        output_filename: str
-    ) -> FileResource:
+        url: str
+    ) -> str:
         """
         Download the Facebook video from the given `url`
         and save it locally with the `output_filename`
@@ -77,18 +111,3 @@ class _FacebookDownloader:
                 video_url = json_response['videos']['hd']['url']
 
                 return video_url
-
-                #  TODO: This is to download
-                file_resource = await self._social_media_downloader._file_downloader._get_file(
-                    url = video_url,
-                    output_filename = output_filename
-                    # TODO: Allow it when 'Output' is public
-                    # output_filename = Output.get_filename(
-                    #     filename = output_filename,
-                    #     file_extension = VideoFileExtension
-                    # )
-                )
-
-                file_resource.source_url = video_url
-
-                return file_resource 

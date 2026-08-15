@@ -6,6 +6,9 @@ from social_media_downloader_easy.downloader.all.dl_arsya_biz_id import _DlArsya
 from social_media_downloader_easy.downloader.facebook.url_parser import FacebookUrlParser
 from social_media_downloader_easy.downloader.instagram.url_parser import InstagramUrlParser
 from social_media_downloader_easy.downloader.tiktok.url_parser import TiktokUrlParser
+from social_media_downloader_easy.platform.facebook.dataclasses import FacebookPostUrl
+from social_media_downloader_easy.platform.instagram.dataclasses import InstagramPostUrl
+from social_media_downloader_easy.platform.tiktok.dataclasses import TiktokPostUrl
 from file_downloader_easy import FileDownloader
 
 
@@ -69,12 +72,14 @@ class SocialMediaDownloader:
         background.
         """
 
+
     async def __aenter__(
         self
     ):
         await self._file_downloader.__aenter__()
 
         return self
+
 
     async def __aexit__(
         self,
@@ -87,6 +92,50 @@ class SocialMediaDownloader:
             exc,
             tb
         )
+
+
+    async def download_video_new(
+        self,
+        url: str,
+        output_filename: str
+    ):
+        """
+        Download the video from the `url`, that 
+        must be a valid and accepted url of a post
+        in Facebook, Instagram or Tiktok.
+        """
+        downloaders = (
+            (FacebookPostUrl, self.facebook),
+            (InstagramPostUrl, self.instagram),
+            (TiktokPostUrl, self.tiktok),
+        )
+
+        # TODO: Maybe reject redirecting urls (?)
+
+        for platform, downloader in downloaders:
+            try:
+                platform_post_url = platform(url)
+            except:
+                continue
+
+            # Get url to download
+            download_url = await downloader.get_download_url(
+                url = platform_post_url.long_url
+            )
+
+            # Download it
+            file_resource = await self._file_downloader._get_file(
+                url = download_url,
+                output_filename = output_filename
+            )
+
+            file_resource.source_url = url
+
+            return file_resource 
+
+        raise ValueError(f'The "url" provided is not a valid Facebook, Instagram nor Tiktok url: {url}')
+
+    
 
     async def download_video(
         self,

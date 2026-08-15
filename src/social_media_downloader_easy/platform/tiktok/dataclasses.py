@@ -77,6 +77,10 @@ class TiktokPostUrl:
     def long_url(
         self
     ) -> str:
+        """
+        The long format of the url that is like this:
+        - https://www.tiktok.com/@user/video/1234567890123456789
+        """
         if self._long_url is not None:
             return self._long_url
 
@@ -186,7 +190,6 @@ class TiktokPostUrl:
         # the long format url
 
         url = tiktok_video_id_to_long_tiktok_url(id)
-        print(url)
 
         return cls(
             url = url,
@@ -223,7 +226,6 @@ class TiktokPostUrl:
         try:
             cls(url)
         except Exception as e:
-            print(e)
             return False
 
         return True

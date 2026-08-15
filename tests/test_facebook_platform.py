@@ -57,6 +57,7 @@ def test_platform_facebook():
     assert facebook_video_url.watch_url == f'https://www.facebook.com/watch/?v={VIDEO_ID}'
     assert facebook_video_url.reel_url == VIDEO_REEL_URL
 
+    # # TODO: Not working properly
     # # Short URL
     # facebook_video_url = FacebookPostUrl(VIDEO_SHORT_URL)
     # assert facebook_video_url._url_type == FacebookUrlType.SHORT_URL

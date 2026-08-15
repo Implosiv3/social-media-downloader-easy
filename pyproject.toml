@@ -1,6 +1,6 @@
 [project]
 name = "social-media-downloader-easy"
-version = "0.0.8"
+version = "0.0.9"
 description = "Download videos from Tiktok, Instagram, Facebook and more, but made easy"
 authors = [
     {name = "danialcala94", email = "danielalcalavalera@gmail.com"}

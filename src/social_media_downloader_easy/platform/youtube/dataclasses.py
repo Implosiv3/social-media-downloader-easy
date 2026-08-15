@@ -163,40 +163,21 @@ class YoutubePostUrl:
         Detect the url type based on the `url`
         provided when initialized.
         """
-        if re.match(
-            YoutubePostUrlRegularExpression.YOUTUBE_WATCH_REGEX.value,
-            self.url,
-        ):
-            self._url_type = YoutubeUrlType.WATCH
-            return
+        regex_type_dict = {
+            YoutubePostUrlRegularExpression.YOUTUBE_WATCH_REGEX: YoutubeUrlType.WATCH,
+            YoutubePostUrlRegularExpression.YOUTUBE_SHORT_URL_REGEX: YoutubeUrlType.SHORT_URL,
+            YoutubePostUrlRegularExpression.YOUTUBE_SHORTS_REGEX: YoutubeUrlType.SHORTS,
+            YoutubePostUrlRegularExpression.YOUTUBE_EMBED_REGEX: YoutubeUrlType.EMBED,
+            YoutubePostUrlRegularExpression.YOUTUBE_V_REGEX: YoutubeUrlType.V
+        }
 
-        if re.match(
-            YoutubePostUrlRegularExpression.YOUTUBE_SHORT_URL_REGEX.value,
-            self.url,
-        ):
-            self._url_type = YoutubeUrlType.SHORT_URL
-            return
-
-        if re.match(
-            YoutubePostUrlRegularExpression.YOUTUBE_SHORTS_REGEX.value,
-            self.url,
-        ):
-            self._url_type = YoutubeUrlType.SHORTS
-            return
-
-        if re.match(
-            YoutubePostUrlRegularExpression.YOUTUBE_EMBED_REGEX.value,
-            self.url,
-        ):
-            self._url_type = YoutubeUrlType.EMBED
-            return
-
-        if re.match(
-            YoutubePostUrlRegularExpression.YOUTUBE_V_REGEX.value,
-            self.url,
-        ):
-            self._url_type = YoutubeUrlType.V
-            return
+        for regex, type in regex_type_dict.items():
+            if re.match(
+                regex,
+                self.url
+            ):
+                self._url_type = type
+                return
 
         raise ValueError(f'Unsupported Youtube post url: {self.url}')
 
@@ -210,9 +191,7 @@ class YoutubePostUrl:
         Extract the id from the original URL.
         """
         if self._url_type == YoutubeUrlType.WATCH:
-            self._id = parse_qs(
-                urlparse(self.url).query
-            )['v'][0]
+            self._id = parse_qs(urlparse(self.url).query)['v'][0]
             return
 
         if self._url_type == YoutubeUrlType.SHORT_URL:
@@ -266,7 +245,6 @@ class YoutubePostUrl:
         try:
             cls(url)
         except Exception as e:
-            print(e)
             return False
 
         return True

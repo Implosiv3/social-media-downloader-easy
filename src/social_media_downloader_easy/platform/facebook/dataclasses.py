@@ -200,7 +200,6 @@ class FacebookPostUrl:
         try:
             cls(url)
         except Exception as e:
-            print(e)
             return False
 
         return True

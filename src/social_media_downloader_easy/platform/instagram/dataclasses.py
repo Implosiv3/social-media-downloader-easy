@@ -53,6 +53,18 @@ class InstagramPostUrl:
 
 
     @property
+    def long_url(
+        self
+    ) -> str:
+        """
+        The long url, a shortcut to the reel url.
+
+        It is like this:
+        - https://www.instagram.com/reel/{self.id}
+        """
+        return self.reel_url
+
+    @property
     def reel_url(
         self
     ) -> str:
@@ -203,7 +215,6 @@ class InstagramPostUrl:
         try:
             cls(url)
         except Exception as e:
-            print(e)
             return False
 
         return True
