@@ -24,7 +24,7 @@ class _TiktokMetadataFetcher:
         """
 
 
-    async def get_metadata(
+    def get_metadata(
         self,
         video_url: str
     ) -> TikTokMetadataEmbed:
@@ -38,9 +38,10 @@ class _TiktokMetadataFetcher:
         # Example of a valid endpoint url
         # https://www.tiktok.com/oembed?url=https://vm.tiktok.com/ZN8eRVqJa
 
-        async with HttpClient() as http_client:
-            async with await http_client.get.complete(endpoint_url) as response:
-                return TikTokMetadataEmbed.from_dict(response.json())
+        with HttpClient() as http_client:
+            response = http_client.get.complete(endpoint_url)
+            # with http_client.get.complete(endpoint_url) as response:
+            return TikTokMetadataEmbed.from_dict(response.json())
 
 
     def get_metadata_with_chrome_scraper(

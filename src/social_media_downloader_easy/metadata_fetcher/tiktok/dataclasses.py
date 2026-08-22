@@ -24,16 +24,23 @@ class TikTokMetadataEmbed:
     The metadata of a public Tiktik video that has
     been received by using the oembed endpoint,
     including these fields:
-    - `title`
+    - `description`
     - `author_url`
     - `author_name`
     - `author_username`
     - `thumbnail_width`
     - `thumbnail_height`
     - `thumbnail_url`
+
+    The embed endpoint is this one:
+    - https://www.tiktok.com/oembed?url={URL_TIKTOK}
     """
 
-    title: str
+    description: str
+    """
+    The description of the video, which could be
+    also the title.
+    """
     author_url: str
     author_name: str
     author_username: str # author_unique_id
@@ -52,7 +59,7 @@ class TikTokMetadataEmbed:
         a database.
         ```
         {
-            'title': self.title,
+            'description': self.description,
             'author_url': self.author_url,
             'author_name': self.author_name,
             'author_username': self.author_username,
@@ -63,7 +70,7 @@ class TikTokMetadataEmbed:
         ```
         """
         return {
-            'title': self.title,
+            'description': self.description,
             'author_url': self.author_url,
             'author_name': self.author_name,
             'author_username': self.author_username,
@@ -79,7 +86,7 @@ class TikTokMetadataEmbed:
         data: dict
     ) -> 'TikTokMetadataEmbed':
         return cls(
-            title = data['title'],
+            description = data['title'],
             author_url = data['author_url'],
             author_name = data['author_name'],
             author_username = data['author_unique_id'],
