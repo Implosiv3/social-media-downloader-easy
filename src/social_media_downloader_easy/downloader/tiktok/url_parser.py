@@ -6,7 +6,7 @@ they are valid ones or not.
 from social_media_downloader_easy.downloader.tiktok.regex import TiktokVideoLinkRegularExpression
 from social_media_downloader_easy.downloader.tiktok.dataclasses import TiktokUrl
 from social_media_downloader_easy.downloader.utils import clean_url
-from httpx_easy.client import HttpClient
+from httpx_easy import HttpClient
 
 import re
 
@@ -48,7 +48,7 @@ class TiktokUrlParser:
         url = clean_url(url)
         # We need it long
         if not TiktokVideoLinkRegularExpression.TIKTOK_VIDEO_LONG_REGEX.is_valid(url):
-            url = await _short_tiktok_url_to_long_tiktok_url(url)
+            url = _short_tiktok_url_to_long_tiktok_url(url)
             url = clean_url(url)
 
         id, username = _get_id_and_username_from_long_url(url)
@@ -81,7 +81,7 @@ def _get_id_and_username_from_long_url(
     return None
 
 
-async def _short_tiktok_url_to_long_tiktok_url(
+def _short_tiktok_url_to_long_tiktok_url(
     url: str
 ) -> str:
     """
@@ -91,8 +91,8 @@ async def _short_tiktok_url_to_long_tiktok_url(
     if not TiktokVideoLinkRegularExpression.TIKTOK_VIDEO_SHORT_REGEX.is_valid_url(url):
         raise Exception('The "url" provided is not a short tiktok url.')
     
-    async with HttpClient(do_follow_redirects = True) as client:
-        response = await client.get.complete(
+    with HttpClient(do_follow_redirects = True) as client:
+        response = client.get.complete(
             url = url
         )
     

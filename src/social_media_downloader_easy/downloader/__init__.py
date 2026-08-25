@@ -159,8 +159,6 @@ class SocialMediaDownloader:
                 # Get url to download
                 download_url = await downloader.get_download_url(
                     url = url,
-                    # TODO: This 'output_filename' is not needed
-                    output_filename = output_filename
                 )
 
                 # Download it

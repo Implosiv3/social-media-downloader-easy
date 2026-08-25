@@ -24,6 +24,7 @@ class TikTokMetadataEmbed:
     The metadata of a public Tiktik video that has
     been received by using the oembed endpoint,
     including these fields:
+
     - `description`
     - `author_url`
     - `author_name`
@@ -31,6 +32,17 @@ class TikTokMetadataEmbed:
     - `thumbnail_width`
     - `thumbnail_height`
     - `thumbnail_url`
+
+    An example of a valid instance:
+    {
+        'description': 'Cambodia has been so quiet and just wanna assure people it is safe, beautiful and full of the kindest locals you will ever meet \U0001faf6\U0001faf6 will continue to try make content but this holiday season is hitting me hard lol so Im just taking it easy rn hence the puffy eyes #cambodia #kohrong #femaletravel #solotravel #travelcambodia ',
+        'author_url': 'https://www.tiktok.com/@laylaloutfi',
+        'author_name': 'Layla Loutfi',
+        'author_username': 'laylaloutfi',
+        'thumbnail_width': 576,
+        'thumbnail_height': 1024,
+        'thumbnail_url': 'https://p16-common-sign.tiktokcdn.com/tos-no1a-p-0037-no/oo1CFkBtiCUpoxHX3IN4AALC33kIIyCPw0fw8i~tplv-tiktokx-dmt-logom:tos-no1a-i-0068-no/oAER8RECFAR6mPkIE3ZEjEgIDfAfFFA48CAp8Q.image?dr=14573&x-expires=1787814000&x-signature=C0l%2FSxubW%2BNqD5w97fWo2qB4IRI%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=my'
+    }
 
     The embed endpoint is this one:
     - https://www.tiktok.com/oembed?url={URL_TIKTOK}
@@ -42,11 +54,24 @@ class TikTokMetadataEmbed:
     also the title.
     """
     author_url: str
+    """
+    The url to visit the author's profile page.
+    """
     author_name: str
+    """
+    The real name of the author that is displayed
+    while watching the video.
+    """
     author_username: str # author_unique_id
+    """
+    The unique username, including not the @.
+    """
     thumbnail_width: int
     thumbnail_height: int
     thumbnail_url: str
+    """
+    The url to obtain the thumbnail image directly.
+    """
 
 
     @property

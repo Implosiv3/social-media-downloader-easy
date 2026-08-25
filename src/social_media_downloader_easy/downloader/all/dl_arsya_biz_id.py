@@ -39,13 +39,15 @@ class _DlArsyaBizIdDownloader:
         # TODO: Validate the 'video_url'
         endpoint_url = f'https://dl.arsya.biz.id/api/download?url={video_url}&deviceType=desktop'
 
-        async with HttpClient(default_headers = HEADERS) as http_client:
-            async with await http_client.get.complete(endpoint_url) as response:
-                data = response.json()
+        with HttpClient(default_headers = HEADERS) as http_client:
+            response = http_client.get.complete(
+                url = endpoint_url
+            )
 
-                media = data['data']['media'][0]
+            data = response.json()
+            media = data['data']['media'][0]
 
-                # thumbnail_url = media['thumbnail']
-                video_url = media['url']
+            # thumbnail_url = media['thumbnail']
+            video_url = media['url']
 
-                return video_url
+            return video_url

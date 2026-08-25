@@ -1,13 +1,10 @@
+from social_media_downloader_easy.platform.utils import get_url_from_redirecting_url
 from social_media_downloader_easy.platform.tiktok.regex import TiktokPostUrlRegularExpression
 from httpx_easy.client import HttpClient
-from web_scraper_easy.chrome import ChromeScraper
-from web_scraper_easy.chrome.dataclasses.options_argument import MuteAudioChromeOptionsArgument, CustomChromeOptionsArgument
 from typing import Union
 
 import re
-import time
 
-from social_media_downloader_easy.platform.utils import get_url_from_redirecting_url
 
 
 def short_tiktok_url_to_long_tiktok_url(

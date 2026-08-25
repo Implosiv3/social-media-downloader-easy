@@ -244,19 +244,19 @@ files = [
 
 [[package]]
 name = "file-downloader-easy"
-version = "0.0.2"
+version = "0.0.3"
 description = "File downloader, but made easy"
 optional = false
 python-versions = "<3.14,>=3.8"
 groups = ["main"]
 files = [
-    {file = "file_downloader_easy-0.0.2-py3-none-any.whl", hash = "sha256:5c02f75c428f1a5d9fd168f2e6950f4bd8b953978f21531a7fd3f61ba59eee26"},
-    {file = "file_downloader_easy-0.0.2.tar.gz", hash = "sha256:e2ef737da02a221c65840afa2412c8d278621d3a00a19f39b8991c72c4f80327"},
+    {file = "file_downloader_easy-0.0.3-py3-none-any.whl", hash = "sha256:2dab0b7b26639fd08de78965824784d0b4c8b686df2bedc09d3585c1c5840e2d"},
+    {file = "file_downloader_easy-0.0.3.tar.gz", hash = "sha256:06f8d11ebc8acf6a04cb286cf293742a7c516843e45be57ddd7d03de4dea211d"},
 ]
 
 [package.dependencies]
 file_easy = ">=0.0.1,<1.0.0"
-httpx_easy = ">=0.0.1,<1.0.0"
+httpx_easy = ">=0.1.0,<1.0.0"
 
 [[package]]
 name = "file-easy"
@@ -777,14 +777,14 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
 [[package]]
 name = "web-scraper-easy"
-version = "0.0.3"
+version = "0.0.5"
 description = "Web scraper, but made easy"
 optional = false
 python-versions = "<3.14,>=3.8"
 groups = ["main"]
 files = [
-    {file = "web_scraper_easy-0.0.3-py3-none-any.whl", hash = "sha256:85ac4bdbbd45bd1cffa5e52ec58ea8375e3316ad19af64370e4aceeb1a6bb8db"},
-    {file = "web_scraper_easy-0.0.3.tar.gz", hash = "sha256:1099d62e2b968272d450632d4aa0983b71b819a65895d04396e7a8bde80a563a"},
+    {file = "web_scraper_easy-0.0.5-py3-none-any.whl", hash = "sha256:64aaa4bedb63479d0e86537a8d01c04fa5b2fc7feb6d07961cc569dc94677a42"},
+    {file = "web_scraper_easy-0.0.5.tar.gz", hash = "sha256:41bb3f2eaa4d2cb2d29d3f1a5cc8ada3d3bdcf6ddec5befc4b9b09a1c8bbbf73"},
 ]
 
 [package.dependencies]
@@ -827,4 +827,4 @@ h11 = ">=0.16.0,<1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.14"
-content-hash = "8bcec10306cd555f6d23a42737db51b64dbc29b99c3c03f84f40b7d2a44e8c1e"
+content-hash = "f246bc5ed93e5875a6b086b8f282cdc83713cd7a4ca5c251b91800d603ac5135"

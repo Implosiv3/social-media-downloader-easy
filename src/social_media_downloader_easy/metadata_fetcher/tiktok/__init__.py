@@ -2,6 +2,7 @@ from social_media_downloader_easy.downloader.tiktok.url_parser import TiktokUrlP
 from social_media_downloader_easy.downloader.tiktok.url_parser import _get_id_and_username_from_long_url
 from social_media_downloader_easy.metadata_fetcher.tiktok.dataclasses import TiktokVideoMetadata, TikTokMetadataEmbed
 from httpx_easy import HttpClient
+from datetime import datetime, timezone
 
 
 class _TiktokMetadataFetcher:
@@ -42,6 +43,55 @@ class _TiktokMetadataFetcher:
             response = http_client.get.complete(endpoint_url)
             # with http_client.get.complete(endpoint_url) as response:
             return TikTokMetadataEmbed.from_dict(response.json())
+
+
+    def get_publication_date(
+        self,
+        video_url: str
+    ) -> datetime:
+        """
+        Get the publication date of the video with
+        the `video_url` given as a timestamptz.
+        """
+
+        endpoint_url = 'https://trevorfox.com/api/tools/tiktok-date-extractor/'
+        headers = {
+            'Origin': 'https://trevorfox.com',
+            'Referer': 'https://trevorfox.com/tiktok-video-date-extractor/',
+            'User-Agent': 'Mozilla/5.0',
+        }
+        json_data = {
+            'url': video_url
+        }
+
+        with HttpClient() as http_client:
+            response = http_client.post.complete(
+                url = endpoint_url,
+                headers = headers,
+                json = json_data
+            )
+
+            """
+            The response obtained is like this:
+            {
+                'dateUTC': 'Sun, 21 Dec 2025 10:04:51 UTC',
+                'dateLocal': 'Dec 21, 2025, 10:04:51 AM',
+                'finalUrl': 'https://www.tiktok.com/@laylaloutfi/video/7586250089434221846',
+                'id': '7586250089434221846'
+            }
+            """
+
+            # TODO: This is also returning the video 'id'
+            data = response.json()
+
+            date_utc = datetime.strptime(
+                data['dateUTC'],
+                '%a, %d %b %Y %H:%M:%S UTC'
+            ).replace(
+                tzinfo = timezone.utc
+            )
+
+            return date_utc
 
 
     def get_metadata_with_chrome_scraper(

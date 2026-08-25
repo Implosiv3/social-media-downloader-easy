@@ -32,7 +32,7 @@ async def test_tiktok():
         for index, url in enumerate(TIKTOK_URLS):
             output_filename = f'test_files/tiktok_{str(index)}.mp4'
 
-            tiktok_video_downloaded = await social_media_downloader.tiktok.download_video(
+            tiktok_video_downloaded = await social_media_downloader.download_video(
                 url = url,
                 output_filename = output_filename
             )
@@ -55,7 +55,7 @@ async def test_instagram():
         for index, url in enumerate(INSTAGRAM_URLS):
             output_filename = f'test_files/instagram_{str(index)}.mp4'
 
-            instagram_video_downloaded = await social_media_downloader.instagram.download_video(
+            instagram_video_downloaded = await social_media_downloader.download_video(
                 url = url,
                 output_filename = output_filename
             )
@@ -79,7 +79,7 @@ async def test_facebook():
         for index, url in enumerate(FACEBOOK_URLS):
             output_filename = f'test_files/facebook_{str(index)}.mp4'
 
-            facebook_video_downloaded = await social_media_downloader.facebook.download_video(
+            facebook_video_downloaded = await social_media_downloader.download_video(
                 url = url,
                 output_filename = output_filename
             )
