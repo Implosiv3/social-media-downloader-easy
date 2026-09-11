@@ -164,11 +164,11 @@ class YoutubePostUrl:
         provided when initialized.
         """
         regex_type_dict = {
-            YoutubePostUrlRegularExpression.YOUTUBE_WATCH_REGEX: YoutubeUrlType.WATCH,
-            YoutubePostUrlRegularExpression.YOUTUBE_SHORT_URL_REGEX: YoutubeUrlType.SHORT_URL,
-            YoutubePostUrlRegularExpression.YOUTUBE_SHORTS_REGEX: YoutubeUrlType.SHORTS,
-            YoutubePostUrlRegularExpression.YOUTUBE_EMBED_REGEX: YoutubeUrlType.EMBED,
-            YoutubePostUrlRegularExpression.YOUTUBE_V_REGEX: YoutubeUrlType.V
+            YoutubePostUrlRegularExpression.YOUTUBE_WATCH_REGEX.value: YoutubeUrlType.WATCH,
+            YoutubePostUrlRegularExpression.YOUTUBE_SHORT_URL_REGEX.value: YoutubeUrlType.SHORT_URL,
+            YoutubePostUrlRegularExpression.YOUTUBE_SHORTS_REGEX.value: YoutubeUrlType.SHORTS,
+            YoutubePostUrlRegularExpression.YOUTUBE_EMBED_REGEX.value: YoutubeUrlType.EMBED,
+            YoutubePostUrlRegularExpression.YOUTUBE_V_REGEX.value: YoutubeUrlType.V
         }
 
         for regex, type in regex_type_dict.items():

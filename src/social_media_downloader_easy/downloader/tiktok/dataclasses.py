@@ -51,6 +51,7 @@ class TikTokMusicInfo:
     original: bool
     duration: int
     album: str
+    create_time: str
 
 
 @dataclass(slots = True)

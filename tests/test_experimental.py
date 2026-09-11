@@ -11,7 +11,7 @@ async def test_snapsave_app():
 
     print(download_url)
 
-    assert False
+    # assert False
 
 
 # TODO: Too many requests sometimes...
@@ -25,5 +25,5 @@ async def test_dl_arsya_biz_id():
 
     print(download_url)
 
-    assert False
+    # assert False
     

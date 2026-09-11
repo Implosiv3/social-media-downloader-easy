@@ -14,20 +14,20 @@ files = [
 
 [[package]]
 name = "anyio"
-version = "4.14.2"
+version = "4.15.1"
 description = "High-level concurrency and networking framework on top of asyncio or Trio"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "anyio-4.14.2-py3-none-any.whl", hash = "sha256:9f505dda5ac9f0c8309b5e8bd445a8c2bf7246f3ce950121e45ea15bc41d1494"},
-    {file = "anyio-4.14.2.tar.gz", hash = "sha256:cfa139f3ed1a23ee8f88a145ddb5ac7605b8bbfd8592baacd7ce3d8bb4313c7f"},
+    {file = "anyio-4.15.1-py3-none-any.whl", hash = "sha256:6152fdbbf9a77fdec97731721bebf7c4c44f7c29b424b0065826173efc7ed101"},
+    {file = "anyio-4.15.1.tar.gz", hash = "sha256:9f28306018cbd6d329e64a36d58256edff76dd996fe423bc957326e578b82a94"},
 ]
 
 [package.dependencies]
 exceptiongroup = {version = ">=1.0.2", markers = "python_version < \"3.11\""}
 idna = ">=2.8"
-typing_extensions = {version = ">=4.5", markers = "python_version < \"3.13\""}
+typing_extensions = {version = ">=4.16.0", markers = "python_version < \"3.15\""}
 
 [package.extras]
 trio = ["trio (>=0.32.0)"]
@@ -198,14 +198,14 @@ files = [
 
 [[package]]
 name = "env-easy"
-version = "0.0.4"
+version = "0.0.7"
 description = "Environment variables, but easy"
 optional = false
 python-versions = "<3.14,>=3.8"
 groups = ["main"]
 files = [
-    {file = "env_easy-0.0.4-py3-none-any.whl", hash = "sha256:d263a3d65d0d671ab3e8dad6bc962d453eaf6b8103edd78a1cb2550ad92db455"},
-    {file = "env_easy-0.0.4.tar.gz", hash = "sha256:cd833f2a79df130f78823f05dedf712387b9c2eb8233fae79c8619407d5bbffa"},
+    {file = "env_easy-0.0.7-py3-none-any.whl", hash = "sha256:5158a1a71964e83895455b6b083a995e62cc6435e5e8fef64d38cbf68ff21baf"},
+    {file = "env_easy-0.0.7.tar.gz", hash = "sha256:7eeb2f030b2477927df902e488178f0399a703c95097d5988f35f1f88b17799a"},
 ]
 
 [package.dependencies]
@@ -602,14 +602,14 @@ cli = ["click (>=5.0)"]
 
 [[package]]
 name = "selenium"
-version = "4.47.0"
+version = "4.49.0"
 description = "Official Python bindings for Selenium WebDriver"
 optional = false
 python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "selenium-4.47.0-py3-none-any.whl", hash = "sha256:2eac6b8e7c017f57ecc40820383da8881a6fd7a90ea555c1b0af322f2344b347"},
-    {file = "selenium-4.47.0.tar.gz", hash = "sha256:4f6667c23080646e045fb91d2039687e88f549d667961f6ce85832b17384b68e"},
+    {file = "selenium-4.49.0-py3-none-any.whl", hash = "sha256:0d1de9ec6977aa2d5f766d923d5076fdffa91681a8d4ffc9e3381a36839a20f2"},
+    {file = "selenium-4.49.0.tar.gz", hash = "sha256:c9d91274e5f55835e12b524adf1f231739ea811a8866d810e5bb42ba87cd8eda"},
 ]
 
 [package.dependencies]
@@ -777,31 +777,31 @@ zstd = ["backports-zstd (>=1.0.0) ; python_version < \"3.14\""]
 
 [[package]]
 name = "web-scraper-easy"
-version = "0.0.5"
+version = "0.0.9"
 description = "Web scraper, but made easy"
 optional = false
 python-versions = "<3.14,>=3.8"
 groups = ["main"]
 files = [
-    {file = "web_scraper_easy-0.0.5-py3-none-any.whl", hash = "sha256:64aaa4bedb63479d0e86537a8d01c04fa5b2fc7feb6d07961cc569dc94677a42"},
-    {file = "web_scraper_easy-0.0.5.tar.gz", hash = "sha256:41bb3f2eaa4d2cb2d29d3f1a5cc8ada3d3bdcf6ddec5befc4b9b09a1c8bbbf73"},
+    {file = "web_scraper_easy-0.0.9-py3-none-any.whl", hash = "sha256:0ed9a888dfccd879c86b016d86e69b740c66525b9c895688975181972f1b4b00"},
+    {file = "web_scraper_easy-0.0.9.tar.gz", hash = "sha256:c3a7f029f4f350a0a380729b075e7749459e711fa7ba5d1b812661003e525aea"},
 ]
 
 [package.dependencies]
-env_easy = ">=0.0.4,<1.0.0"
+env_easy = ">=0.0.7,<1.0.0"
 pystandards = ">=0.0.17,<1.0.0"
 selenium = ">=4.27.1,<9999.0.0"
 
 [[package]]
 name = "websocket-client"
-version = "1.9.0"
+version = "1.9.2"
 description = "WebSocket client for Python with low level API options"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.10"
 groups = ["main"]
 files = [
-    {file = "websocket_client-1.9.0-py3-none-any.whl", hash = "sha256:af248a825037ef591efbf6ed20cc5faa03d3b47b9e5a2230a529eeee1c1fc3ef"},
-    {file = "websocket_client-1.9.0.tar.gz", hash = "sha256:9e813624b6eb619999a97dc7958469217c3176312b3a16a4bd1bc7e08a46ec98"},
+    {file = "websocket_client-1.9.2-py3-none-any.whl", hash = "sha256:e1a673830a9c7bfa47b1cd3d5e4178f4c9651d80a4eab02c9c23a1c3ec6250ce"},
+    {file = "websocket_client-1.9.2.tar.gz", hash = "sha256:0fcb57545848be86992e128218fd96dd87a6769ffdb1a968dff79632b85604d0"},
 ]
 
 [package.extras]
@@ -827,4 +827,4 @@ h11 = ">=0.16.0,<1"
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.10,<3.14"
-content-hash = "f246bc5ed93e5875a6b086b8f282cdc83713cd7a4ca5c251b91800d603ac5135"
+content-hash = "289e2da2e6ecec19206d0a69cb346e846dff5d5b974e853b934a742eee118842"
