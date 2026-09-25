@@ -134,7 +134,17 @@ def _get_request_headers_and_body(
         # A valid sessionId I had in the past:
         # 'ab44d080-fbc8-4466-b035-4c1a6abbe608'
         'sessionId': str(uuid.uuid4()),
-        'version': '0.1.58'
+        """
+        This version here is changing every time
+        the developers launch a new endpoint, so
+        we should be able to update it dynamically
+        or something when it changes. If you
+        navigate to 'https://www.ig.media/' and
+        download a reel, the request will show you
+        the current version so you can replace it
+        here and it is solved.
+        """
+        'version': '0.1.62'
     }
 
     # The body has to be the exact json
